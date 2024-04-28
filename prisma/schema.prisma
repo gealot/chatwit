@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  email     String   @unique
+  password  String
+  nickname  String?
+  avatar    String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  tweets    Tweet[]
+  likes     Like[]
+  // follows   Follow[]   @relation("Follows")
+  // followers Follow[]   @relation("FollowedBy")
+}
+
+model Tweet {
+  id        String   @id @default(cuid())
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  likes     Like[]
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  tweetId   String
+  tweet     Tweet    @relation(fields: [tweetId], references: [id])
+  createdAt DateTime @default(now())
+}
+
+// model Follow {
+//   id          String   @id @default(cuid())
+//   userId      String
+//   followingId String
+//   follows     User @relation("Follows", fields: [userId], references: [id])
+//   following   User @relation("FollowedBy", fields: [followingId], references: [id])
+//   createdAt   DateTime @default(now())
+//   updatedAt   DateTime @updatedAt
+// }

@@ -1,0 +1,40 @@
+@import '~sanitize.css';
+@import '~sanitize.css/forms.css';
+@import '~sanitize.css/typography.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: "Pretendard Variable", "NanumSquareNeo-Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  --k900: 0, 0, 0;
+  --k800: 38, 38, 38;
+  --k700: 67, 67, 67;
+  --k600: 85, 85, 85;
+  --k500: 123, 123, 123;
+  --k400: 157, 157, 157;
+  --k300: 196, 196, 196;
+  --k200: 217, 217, 217;
+  --k100: 233, 233, 233;
+  --k50: 245, 245, 245;
+  --k0: 255, 255, 255;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(var(--k100));
+}
+
+a:hover {
+  color: rgb(var(--k0));
+  transition: color 0.2s ease-in-out;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
